@@ -34,9 +34,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          token: ${{secrets.PAT}}
           repository: ${{env.MANIFEST_REPO}}
           ref: main
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Update image tag in deployment file
         run: |
@@ -46,7 +46,6 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.PAT }}
           commit-message: Update image tag to ${{ github.ref_name }}
           title: Update image tag to ${{ github.ref_name }}
           body: This PR updates the image tag in the deployment file to ${{ github.ref_name }}.
