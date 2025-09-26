@@ -139,20 +139,19 @@ jobs:
 
 > A estrutura final desse repositório ficará assim:
 > o README.md não é fundamental mas é recomendado :))
-> ![[1_estrutura_hello-main.png]]
-
-Commite e faça o push para o seu repositório remoto.
+> ![estrutura_hello-main](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/1_estrutura_hello-main.png)
 
 ## Criando um repositório remoto
 
 No seu perfil, clique em `Repositories`e depois em `New`.
-![[2_Criando novo repo.png]]
+![Criando novo repo](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/2_Criando%20novo%20repo.png)
 
 Nomeie o repositório e clique em `Create repository`. Neste exemplo estarei chamando de hello-app
-![[3_nomeando repositorio.png]]
+![nomeando repositorio](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/3_nomeando%20repositorio.png)
 
 Copie o link `HTTPS` em `<> Code`
-![[4_copiando_link.png]]
+
+![copiando_link](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/4_copiando_link.png)
 
 No terminal, dentro da pasta em que criamos nossos arquivos, cole o seguinte, substituindo pelo seu link:
 
@@ -178,50 +177,51 @@ Utilizaremos no total 3 secrets:
 
 Vá até o repositório onde está nosso build_and_push.yaml (nesse exemplo é o hello-app), clique em settings, depois em `Secrets and variables` , depois em `Actions`.
 
-![[5_settando primeiro secret.png]]
+![settando primeiro secret](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/5_settando%20primeiro%20secret.png)
 
 Clique em "New repository secret"
-![[6_new repo secret.png]]
+![new repo secret](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/6_new%20repo%20secret.png)
 
 ### DOCKER_USERNAME:
 
-![[7_docker username.png]]
+![docker username](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/7_docker%20username.png)
 
 ### DOCKER_PASSWORD
 
 Por questões de segurança, vamos criar um Personal Acess Token no DockerHub para o secret DOCKER_PASSWORD:
 
 Acesse o DockerHub, clique na sua foto de perfil no canto superior direito e depois em "Account settings"
-![[8_acessando configuracoes dockerhub.png]]
+![acessando configuracoes dockerhub](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/8_acessando%20configuracoes%20dockerhub.png)
 
 Na barra lateral, clique em Personal access tokens:
-![[9_pat docker hub.png]]
+![pat docker hub](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/9_pat%20docker%20hub.png)
 
 Clique em "Generate new token":
-![[10_generate new token.png]]
+![generate new token](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/10_generate%20new%20token.png)
 
 Nomeie a chave, escolha o tempo de vida da chave, escolha `Read & Write` e clique em "Generate"
-![[11_config token.png]]
+![config token](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/11_config%20token.png)
 
 Copie a senha gerada:
-![[12_copiando senha.png]]
+
+![copiando senha](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/12_copiando%20senha.png)
 
 Crie um novo secret, nomeie como DOCKER_PASSWORD, cole a senha gerada na aba "secret" e clique em "Add secret"
 
-![[13_finalizando docker password.png]]
+![finalizando docker password](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/13_finalizando%20docker%20password.png)
 
 ### PAT
 
 Clique no [link](https://github.com/settings/apps), clique em "Generate new token" e depois em "Generate new tocken (classic)"
-![[14_PAT classico.png]]
+![PAT classico](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/14_PAT%20classico.png)
 
 Escreva uma descrição, marque a opção de `repo` e `workflow` e depois clique em "Generate token"
-![[15_workflow.png]]
+![workflow](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/15_workflow.png)
 
 Copie a chave e crie um novo Secret no repositório hello-app
-![[16_copia token.png]]
+![copia token](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/16_copia%20token.png)
 
-![[17_cola pat.png]]
+![cola pat](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/17_cola%20pat.png)
 
 Pronto! Essa parte do projeto está concluida. Vamos para a automação com ArgoCD.
 
@@ -230,7 +230,8 @@ Pronto! Essa parte do projeto está concluida. Vamos para a automação com Argo
 Crie um novo repositório com uma pasta `k8s`que comporta os arquivos `deployment.yaml`e `service.yaml`. Nesse exemplo o repositório remoto será chamado de `hello-manifest`
 
 Nele nos teremos a seguinte estrutura:
-![[18_repo manifest.png]]
+
+![repo manifest](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/18_repo%20manifest.png)
 
 O conteúdo dos arquivos yaml serão respectivamente o seguinte:
 
@@ -292,16 +293,16 @@ Commite e dê push no repositório remoto. Vamos para o ArgoCD agora :))
 [Tutorial de como instalar, e acessar o ArgoCD](https://github.com/vitorialeda/Projeto-3-Kubernetes?tab=readme-ov-file#4-instalando-o-argocd)
 
 Clique em `Create Application`, dê um nome ao seu aplicativo, selecione o projeto e hablite a sincronização automatica
-![[19_create app.png]]
+![create app](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/19_create%20app.png)
 
 Copie o link do repositório hello-manifest na aba `Code` no GitHub, e cole na área `Repository URL` e em `path` digite `k8s` presentes na seção `Source`
-![[20_source.png]]
+![source](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/20_source.png)
 
 Preencha a seção `Destination` da seguinte forma:
-![[21_Destination.png]]
+![Destination](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/21_Destination.png)
 
 e clique em `Create app` no canto superior esquerdo, e nossa aplicação será iniciada:
-![[22_aplicacao rodando.png]]
+![aplicacao rodando](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/22_aplicacao%20rodando.png)
 
 ## Testando a aplicação
 
@@ -328,12 +329,14 @@ Acesse no se navegador:
 `localhost:30000`
 
 Você deverá ver algo assim:
-![[23_visualizando no navegador.png]]
+
+![visualizando no navegador](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/23_visualizando%20no%20navegador.png)
 
 ## Criando e testando uma nova versão da aplicação:
 
 No arquivo `main.py` mude algo como:
-![[24_Modificando app.png]]
+
+![Modificando app](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/24_Modificando%20app.png)
 
 Commite e dê push para o repositório remoto e relacione à uma nova tag:
 
@@ -347,23 +350,25 @@ git push origin v1.0
 ```
 
 Criação de uma nova tag a partir do Github Actions
-![[25_nova tag.png]]
+![nova tag](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/25_nova%20tag.png)
 
 Novo pull request criado no repositório de manifestos
-![[26_novo pull request.png]]
+![novo pull request](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/26_novo%20pull%20request.png)
 
 > Faça o merge desse pull request para que o ArgoCD capte a mudança
 
 Clique em `Refresh` para atualizar o ArgoCD
-![[27_refresh argo.png]]
+![Refresh argo](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/27_refresh%20argo.png)
 
 Agora a imagem foi de latest para v1.0
-![[28_checando imagem.png]]
+![checando imagem](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/28_checando%20imagem.png)
 
 O conteúdo da resposta também foi atualizado:
-![[29_att conteudo.png]]
 
-Pods rodando
-![[30_pods rodando.png]]
+![att conteudo](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/29_att%20conteudo.png)
+
+Pods rodando:
+
+![pods rodando](https://github.com/vitorialeda/hello-app/blob/main/doc/imgs/30_pods%20rodando.png)
 
 E é isso! Obrigada por acompanhar até aqui!
