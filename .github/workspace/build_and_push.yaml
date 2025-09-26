@@ -1,0 +1,54 @@
+name: ci
+
+on:
+  push:
+    tags:
+      - "v*.*"
+
+env:
+  DOCKER_REPO: vitorialeda/projeto-4
+  MANIFEST_REPO: vitorialeda/hello-manifest
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: ${{ env.DOCKER_REPO }}:${{ github.ref_name }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          repository: ${{env.MANIFEST_REPO}}
+          ref: main
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Update image tag in deployment file
+        run: |
+          sudo apt-get install -y yq
+          yq -i -y '.spec.template.spec.containers[0].image = "${{ env.DOCKER_REPO }}:${{ github.ref_name }}"' k8s/deployment.yaml
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update image tag to ${{ github.ref_name }}
+          title: Update image tag to ${{ github.ref_name }}
+          body: This PR updates the image tag in the deployment file to ${{ github.ref_name }}.
+          branch: update-image-tag-${{ github.ref_name }}
+          base: main
