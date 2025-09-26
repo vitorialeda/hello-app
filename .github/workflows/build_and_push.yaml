@@ -46,6 +46,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
+          token: ${{ secrets.PAT }}
           commit-message: Update image tag to ${{ github.ref_name }}
           title: Update image tag to ${{ github.ref_name }}
           body: This PR updates the image tag in the deployment file to ${{ github.ref_name }}.
