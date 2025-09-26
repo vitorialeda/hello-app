@@ -36,7 +36,7 @@ jobs:
         with:
           repository: ${{env.MANIFEST_REPO}}
           ref: main
-          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          token: ${{ secrets.PAT }}
 
       - name: Update image tag in deployment file
         run: |
